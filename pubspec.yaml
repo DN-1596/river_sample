@@ -1,0 +1,75 @@
+name: river_sample
+description: A new Flutter project.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+isar_version: &isar_version any
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+  flutter_riverpod: any
+  riverpod_annotation: any
+
+  isar: *isar_version
+  isar_flutter_libs: *isar_version
+
+  path_provider: any
+
+
+  dio: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: any
+  riverpod_generator: any
+  isar_generator: *isar_version
+  custom_lint: any
+  riverpod_lint: any
+
+
+  flutter_lints: ^2.0.0
+
+
+flutter:
+  uses-material-design: true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
