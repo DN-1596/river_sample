@@ -6,11 +6,11 @@ part of 'repo_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$activityRepoImplHash() => r'4a96ccbb18fb57a22cb0e1e8a6993d7187ba60ef';
+String _$activityRepoImplHash() => r'0c852707f2cf2e4376ee3293f80d226adcf8d9da';
 
 /// See also [activityRepoImpl].
 @ProviderFor(activityRepoImpl)
-final activityRepoImplProvider = AutoDisposeProvider<ActivityRepo>.internal(
+final activityRepoImplProvider = Provider<ActivityRepo>.internal(
   activityRepoImpl,
   name: r'activityRepoImplProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -20,6 +20,6 @@ final activityRepoImplProvider = AutoDisposeProvider<ActivityRepo>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef ActivityRepoImplRef = AutoDisposeProviderRef<ActivityRepo>;
+typedef ActivityRepoImplRef = ProviderRef<ActivityRepo>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

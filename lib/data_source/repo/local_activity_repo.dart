@@ -5,9 +5,10 @@ import 'package:river_sample/data_source/isar_db/isar_db.dart';
 import '../isar_db/schemas/activity.dart';
 
 class LocalActivityRepo {
-
   Stream<List<Activity>> activityListStream() {
-    return IsarDB().db.activitys.filter().activityIsNotEmpty().watch();
+    return IsarDB().db.activitys.filter().activityIsNotEmpty().watch(
+          fireImmediately: true,
+        );
   }
 
   Future<void> saveActivity(Activity activity) async {

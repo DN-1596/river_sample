@@ -19,6 +19,13 @@ class _ActivityCardState extends ConsumerState<ActivityCard> {
   bool isSelected = false;
 
   @override
+  void initState() {
+    isSelected =
+        ref.read(selectedActivityProvider)?.id == widget.activityEntity.id;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     ref.listen<ActivityEntity?>(
       selectedActivityProvider,
@@ -63,7 +70,7 @@ class _ActivityCardState extends ConsumerState<ActivityCard> {
     );
   }
 
-  void onActivitySelected(ActivityEntity? previous,ActivityEntity? next) {
+  void onActivitySelected(ActivityEntity? previous, ActivityEntity? next) {
     bool isSelectedNow = next?.id == widget.activityEntity.id;
     if (isSelected != isSelectedNow) {
       setState(() {

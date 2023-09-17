@@ -5,13 +5,13 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'activity_form.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ActivityForm extends _$ActivityForm {
   final List<ActivityEntity> _fetchedActivities = [];
 
   @override
   List<ActivityEntity> build() {
-    return [];
+    return _fetchedActivities;
   }
 
   void fetchActivity(ActivityType activityType) async {
@@ -27,7 +27,7 @@ class ActivityForm extends _$ActivityForm {
   }
 
   Stream<List<ActivityEntity>> fetchAllActivitiesFromDB() {
-    return ref.watch(activityManagerProvider.notifier).fetchAllActivitiesFromDB(
+    return ref.watch(activityManagerProvider.notifier).fetchAllAvailableActivities(
           ref.watch(activityRepoImplProvider),
         );
   }

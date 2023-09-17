@@ -10,9 +10,7 @@ void main() {
     (_) {
       runApp(
         const ProviderScope(
-          child: MaterialApp(
-            home: MyApp(),
-          ),
+          child: MyApp(),
         ),
       );
     },

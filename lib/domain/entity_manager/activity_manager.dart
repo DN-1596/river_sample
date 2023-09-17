@@ -6,14 +6,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'activity_manager.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ActivityManager extends _$ActivityManager {
   @override
   FutureOr<ActivityEntity?> build() async {
     return Future.value(null);
   }
 
-  Stream<List<ActivityEntity>> fetchAllActivitiesFromDB(
+  Stream<List<ActivityEntity>> fetchAllAvailableActivities(
     ActivityRepo activityRepo,
   ) {
     return activityRepo.getAllActivity();

@@ -1,25 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'activity_form.dart';
+part of 'router_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$activityFormHash() => r'c5a7bf8a7a8510e49417332bc6ad4eb2c61bdca7';
+String _$appRouterHash() => r'80bee081381559f043397711d2535900ff85d355';
 
-/// See also [ActivityForm].
-@ProviderFor(ActivityForm)
-final activityFormProvider =
-    NotifierProvider<ActivityForm, List<ActivityEntity>>.internal(
-  ActivityForm.new,
-  name: r'activityFormProvider',
+/// See also [AppRouter].
+@ProviderFor(AppRouter)
+final appRouterProvider =
+    AutoDisposeNotifierProvider<AppRouter, GoRouter>.internal(
+  AppRouter.new,
+  name: r'appRouterProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$activityFormHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$appRouterHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$ActivityForm = Notifier<List<ActivityEntity>>;
+typedef _$AppRouter = AutoDisposeNotifier<GoRouter>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

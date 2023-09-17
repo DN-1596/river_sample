@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:river_sample/presentation/providers/presser/presser.dart';
 
@@ -10,20 +10,30 @@ class PressCountTracker extends ConsumerWidget {
     var presserState = ref.watch(presserProvider);
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-                "BUTTON 1 press count - ${presserState.button1PressCount}"),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-                "BUTTON 2 press count - ${presserState.button2PressCount}"),
-          ),
-        ],
+      child: Container(
+        alignment: Alignment.center,
+        color: Colors.grey.shade400,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "PRESS COUNTS",
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                  "BUTTON 1 - ${presserState.button1PressCount}"),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                  "BUTTON 2 - ${presserState.button2PressCount}"),
+            ),
+          ],
+        ),
       ),
     );
   }

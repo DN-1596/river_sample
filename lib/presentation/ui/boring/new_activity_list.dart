@@ -15,6 +15,12 @@ class NewActivityList extends ConsumerStatefulWidget {
 }
 
 class _NewActivityListState extends ConsumerState<NewActivityList> {
+  late List<ActivityEntity> acts;
+  @override
+  void initState() {
+    acts = ref.read(activityFormProvider);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     List<ActivityEntity> acts = ref.watch(activityFormProvider);

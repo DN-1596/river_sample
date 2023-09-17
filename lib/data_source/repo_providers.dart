@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'repo_providers.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 ActivityRepo activityRepoImpl(ActivityRepoImplRef ref) {
   return ActivityRepoImpl();
 }

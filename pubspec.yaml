@@ -23,6 +23,7 @@ dependencies:
   isar_flutter_libs: *isar_version
 
   path_provider: any
+  go_router: any
 
 
   dio: any
