@@ -58,24 +58,14 @@ int _activityEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  {
-    final value = object.activity;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
+  bytesCount += 3 + object.activity.length * 3;
   {
     final value = object.key;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
-  {
-    final value = object.type;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
+  bytesCount += 3 + object.type.length * 3;
   return bytesCount;
 }
 
@@ -98,10 +88,10 @@ Activity _activityDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Activity(
-    activity: reader.readStringOrNull(offsets[0]),
+    activity: reader.readString(offsets[0]),
     key: reader.readStringOrNull(offsets[1]),
     participants: reader.readLongOrNull(offsets[2]),
-    type: reader.readStringOrNull(offsets[3]),
+    type: reader.readString(offsets[3]),
   );
   object.id = id;
   return object;
@@ -115,13 +105,13 @@ P _activityDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 1:
       return (reader.readStringOrNull(offset)) as P;
     case 2:
       return (reader.readLongOrNull(offset)) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -216,24 +206,8 @@ extension ActivityQueryWhere on QueryBuilder<Activity, Activity, QWhereClause> {
 
 extension ActivityQueryFilter
     on QueryBuilder<Activity, Activity, QFilterCondition> {
-  QueryBuilder<Activity, Activity, QAfterFilterCondition> activityIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'activity',
-      ));
-    });
-  }
-
-  QueryBuilder<Activity, Activity, QAfterFilterCondition> activityIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'activity',
-      ));
-    });
-  }
-
   QueryBuilder<Activity, Activity, QAfterFilterCondition> activityEqualTo(
-    String? value, {
+    String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -246,7 +220,7 @@ extension ActivityQueryFilter
   }
 
   QueryBuilder<Activity, Activity, QAfterFilterCondition> activityGreaterThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -261,7 +235,7 @@ extension ActivityQueryFilter
   }
 
   QueryBuilder<Activity, Activity, QAfterFilterCondition> activityLessThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -276,8 +250,8 @@ extension ActivityQueryFilter
   }
 
   QueryBuilder<Activity, Activity, QAfterFilterCondition> activityBetween(
-    String? lower,
-    String? upper, {
+    String lower,
+    String upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -631,24 +605,8 @@ extension ActivityQueryFilter
     });
   }
 
-  QueryBuilder<Activity, Activity, QAfterFilterCondition> typeIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'type',
-      ));
-    });
-  }
-
-  QueryBuilder<Activity, Activity, QAfterFilterCondition> typeIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'type',
-      ));
-    });
-  }
-
   QueryBuilder<Activity, Activity, QAfterFilterCondition> typeEqualTo(
-    String? value, {
+    String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -661,7 +619,7 @@ extension ActivityQueryFilter
   }
 
   QueryBuilder<Activity, Activity, QAfterFilterCondition> typeGreaterThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -676,7 +634,7 @@ extension ActivityQueryFilter
   }
 
   QueryBuilder<Activity, Activity, QAfterFilterCondition> typeLessThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -691,8 +649,8 @@ extension ActivityQueryFilter
   }
 
   QueryBuilder<Activity, Activity, QAfterFilterCondition> typeBetween(
-    String? lower,
-    String? upper, {
+    String lower,
+    String upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -935,7 +893,7 @@ extension ActivityQueryProperty
     });
   }
 
-  QueryBuilder<Activity, String?, QQueryOperations> activityProperty() {
+  QueryBuilder<Activity, String, QQueryOperations> activityProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'activity');
     });
@@ -953,7 +911,7 @@ extension ActivityQueryProperty
     });
   }
 
-  QueryBuilder<Activity, String?, QQueryOperations> typeProperty() {
+  QueryBuilder<Activity, String, QQueryOperations> typeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'type');
     });

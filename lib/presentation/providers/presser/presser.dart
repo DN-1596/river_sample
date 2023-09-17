@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'presser.g.dart';
@@ -10,7 +12,7 @@ class Presser extends _$Presser {
   /// CALLED ONLY ONCE or on provider dispose
   @override
   PresserState build() {
-    print("INITIATING ... PRESSER STATE ");
+    log("INITIATING ... PRESSER STATE ");
     return PresserState(11,11);
   }
 
