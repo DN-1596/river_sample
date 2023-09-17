@@ -6,7 +6,7 @@ part of 'activity_manager.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$activityManagerHash() => r'67c4427ade7460e5977bad426b6ba00293fa9d9e';
+String _$activityManagerHash() => r'a7f16342636741ec6496d04586f83c07c91db4aa';
 
 /// See also [ActivityManager].
 @ProviderFor(ActivityManager)

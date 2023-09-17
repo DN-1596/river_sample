@@ -20,40 +20,51 @@ class _ActivityCardState extends ConsumerState<ActivityCard> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(
+    ref.listen<ActivityEntity?>(
       selectedActivityProvider,
-      (previous, next) => onActivitySelected(next),
+      onActivitySelected,
     );
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ListTile(
-        key: UniqueKey(),
-        selectedTileColor: Colors.green.shade700.withOpacity(0.5),
-        tileColor: Colors.grey.shade200,
-        leading: CircleAvatar(
-          backgroundColor: Colors.white,
-          child: Text(
+    Widget avatar = isSelected
+        ? Icon(
+            Icons.check,
+            color: Colors.green.shade800,
+            size: 25,
+          )
+        : Text(
             widget.activityEntity.activityName[0],
             style: const TextStyle(
               color: Colors.black,
             ),
-          ),
+          );
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListTile(
+        selectedTileColor: Colors.green.shade700.withOpacity(0.5),
+        tileColor: Colors.grey.shade200,
+        leading: CircleAvatar(
+          backgroundColor: Colors.white,
+          child: avatar,
         ),
         title: Text(widget.activityEntity.activityName),
         subtitle: Text(widget.activityEntity.activityType.name),
         selected: isSelected,
         onTap: () {
-          ref.watch(selectedActivityProvider.notifier).selectActivity(
-                isSelected ? null : widget.activityEntity,
-              );
+          if (isSelected) {
+            ref.watch(selectedActivityProvider.notifier).unselectActivity();
+          } else {
+            ref.watch(selectedActivityProvider.notifier).selectActivity(
+                  widget.activityEntity,
+                );
+          }
         },
       ),
     );
   }
 
-  void onActivitySelected(ActivityEntity? selectedActivity) {
-    bool isSelectedNow = selectedActivity?.id == widget.activityEntity.id;
+  void onActivitySelected(ActivityEntity? previous,ActivityEntity? next) {
+    bool isSelectedNow = next?.id == widget.activityEntity.id;
     if (isSelected != isSelectedNow) {
       setState(() {
         isSelected = isSelectedNow;

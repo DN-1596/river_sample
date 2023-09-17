@@ -10,7 +10,7 @@ part 'activity_manager.g.dart';
 class ActivityManager extends _$ActivityManager {
   @override
   FutureOr<ActivityEntity?> build() async {
-    return state.value;
+    return Future.value(null);
   }
 
   Stream<List<ActivityEntity>> fetchAllActivitiesFromDB(

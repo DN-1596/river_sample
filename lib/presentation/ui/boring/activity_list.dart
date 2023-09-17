@@ -20,6 +20,9 @@ class ActivityList extends StatelessWidget {
       itemCount: activityEntityList.length,
       itemBuilder: (context, i) {
         return ActivityCard(
+          key: Key(
+            activityEntityList[i].id.toString(),
+          ),
           activityEntity: activityEntityList[i],
         );
       },

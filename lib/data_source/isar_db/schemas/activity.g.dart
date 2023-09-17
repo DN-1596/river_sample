@@ -89,11 +89,11 @@ Activity _activityDeserialize(
 ) {
   final object = Activity(
     activity: reader.readString(offsets[0]),
+    id: id,
     key: reader.readStringOrNull(offsets[1]),
     participants: reader.readLongOrNull(offsets[2]),
     type: reader.readString(offsets[3]),
   );
-  object.id = id;
   return object;
 }
 
