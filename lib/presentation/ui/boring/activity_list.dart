@@ -13,19 +13,37 @@ class ActivityList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (activityEntityList.isEmpty) {
-      return const Text("No new activities available");
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          alignment: Alignment.topLeft,
+          child: const Text("No new activities available"),
+        ),
+      );
     }
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: activityEntityList.length,
-      itemBuilder: (context, i) {
-        return ActivityCard(
-          key: Key(
-            activityEntityList[i].id.toString(),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text("Tap on any activity to select it"),
+        ),
+        Expanded(
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: activityEntityList.length,
+            itemBuilder: (context, i) {
+              return ActivityCard(
+                key: Key(
+                  activityEntityList[i].id.toString(),
+                ),
+                activityEntity: activityEntityList[i],
+              );
+            },
           ),
-          activityEntity: activityEntityList[i],
-        );
-      },
+        ),
+      ],
     );
   }
 }

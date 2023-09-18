@@ -8,12 +8,14 @@ part 'presser_state.dart';
 @riverpod
 class Presser extends _$Presser {
 
+  static final PresserState _defaultState =  PresserState(0,0);
+
   /// THIS IS USED FOR LAZY LOADING
   /// CALLED ONLY ONCE or on provider dispose
   @override
   PresserState build() {
     log("INITIATING ... PRESSER STATE ");
-    return PresserState(11,11);
+    return _defaultState;
   }
 
   void pressButton(String buttonName) {

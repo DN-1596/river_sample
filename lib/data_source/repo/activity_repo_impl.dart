@@ -27,7 +27,7 @@ class ActivityRepoImpl extends ActivityRepo {
   }
 
   @override
-  Stream<List<ActivityEntity>> getAllActivity() {
+  Stream<List<ActivityEntity>> activityListStream() {
     return localActivityRepo.activityListStream().transform(
       StreamTransformer.fromHandlers(
         handleData: (data, sink) {

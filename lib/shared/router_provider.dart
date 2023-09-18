@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:river_sample/presentation/ui/available_activities.dart';
 import 'package:river_sample/presentation/ui/boring/boring_screen.dart';
 import 'package:river_sample/presentation/ui/home/home_screen.dart';
 import 'package:river_sample/presentation/ui/presser/presser_screen.dart';
@@ -33,7 +34,7 @@ class AppRouter extends _$AppRouter {
           GoRoute(
             path: availableActivitiesRoute,
             builder: (context, state) {
-              return const HomeScreen();
+              return const AvailableActivities();
             },
           ),
         ],

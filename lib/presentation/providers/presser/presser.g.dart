@@ -6,7 +6,7 @@ part of 'presser.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$presserHash() => r'70d74ce12ddf71433cde2783030e4372b97936eb';
+String _$presserHash() => r'b2f6b5d4167edaaa40a6d0af913d7bc2034f8db0';
 
 /// See also [Presser].
 @ProviderFor(Presser)

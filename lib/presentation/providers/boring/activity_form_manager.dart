@@ -3,10 +3,10 @@ import 'package:river_sample/domain/entities/activity_entity.dart';
 import 'package:river_sample/domain/entity_manager/activity_manager.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'activity_form.g.dart';
+part 'activity_form_manager.g.dart';
 
-@Riverpod(keepAlive: true)
-class ActivityForm extends _$ActivityForm {
+@riverpod
+class ActivityFormManager extends _$ActivityFormManager {
   final List<ActivityEntity> _fetchedActivities = [];
 
   @override

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:river_sample/domain/entities/activity_entity.dart';
 import 'package:river_sample/domain/entity_manager/activity_manager.dart';
-import 'package:river_sample/presentation/providers/boring/activity_form.dart';
+import 'package:river_sample/presentation/providers/boring/activity_form_manager.dart';
 import 'package:river_sample/presentation/ui/components/general.dart';
+import 'package:river_sample/shared/named_routes.dart';
+import 'package:river_sample/shared/router_provider.dart';
 
 class ActivityFormUI extends ConsumerStatefulWidget {
   const ActivityFormUI({super.key});
@@ -48,7 +50,7 @@ class _ActivityFormUIState extends ConsumerState<ActivityFormUI> {
                   if (!ref.watch(activityManagerProvider).isLoading &&
                       activityType != null) {
                     ref
-                        .watch(activityFormProvider.notifier)
+                        .watch(activityFormManagerProvider.notifier)
                         .fetchActivity(activityType!);
                   }
                 },
@@ -61,10 +63,14 @@ class _ActivityFormUIState extends ConsumerState<ActivityFormUI> {
               spaceWidget,
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue.shade700.withOpacity(0.35),
+                  backgroundColor: Colors.blue.shade700,
                 ),
-                onPressed: () {},
-                child: const Text("Select from all available activities ↗️"),
+                onPressed: () {
+                  ref.watch(appRouterProvider).push(
+                        availableActivitiesRoute,
+                      );
+                },
+                child: const Text("Select from all available activities"),
               ),
             ],
           ),
