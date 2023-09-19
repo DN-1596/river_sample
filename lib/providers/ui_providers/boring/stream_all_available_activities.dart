@@ -1,6 +1,7 @@
 import 'package:river_sample/domain/entities/activity_entity.dart';
-import 'package:river_sample/providers/data_repo_providers/repo_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../domain_providers/activity_entity_use_case_provider.dart';
 
 part 'stream_all_available_activities.g.dart';
 
@@ -8,5 +9,5 @@ part 'stream_all_available_activities.g.dart';
 Stream<List<ActivityEntity>> streamAllAvailableActivities(
     StreamAllAvailableActivitiesRef ref,
 ) {
-  return ref.watch(activityRepoImplProvider).activityListStream();
+  return ref.watch(activityEntityUseCaseProvider).streamAllAvailableActivities();
 }

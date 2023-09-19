@@ -7,7 +7,7 @@ part of 'stream_all_available_activities.dart';
 // **************************************************************************
 
 String _$streamAllAvailableActivitiesHash() =>
-    r'049405d7e6d74dd92ac5c36c53ede080b1178f89';
+    r'382e5be4b7d77410085befed11f38fb78cf7378b';
 
 /// See also [streamAllAvailableActivities].
 @ProviderFor(streamAllAvailableActivities)

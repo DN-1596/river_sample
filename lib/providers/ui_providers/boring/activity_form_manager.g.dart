@@ -7,7 +7,7 @@ part of 'activity_form_manager.dart';
 // **************************************************************************
 
 String _$fetchNewActivityListHash() =>
-    r'9c4f17493a6db2a6b2912e8a7b97ad66b2a0eb52';
+    r'4289f9943080a2c00bafadd9ed8ebb8100104afc';
 
 /// See also [FetchNewActivityList].
 @ProviderFor(FetchNewActivityList)

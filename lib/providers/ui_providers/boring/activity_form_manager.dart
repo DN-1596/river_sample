@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:river_sample/domain/repositories/activity_repo.dart';
-import 'package:river_sample/providers/data_repo_providers/repo_providers.dart';
 import 'package:river_sample/domain/entities/activity_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../domain_providers/activity_entity_use_case_provider.dart';
 
 part 'activity_form_manager.g.dart';
 
@@ -18,21 +18,23 @@ class FetchNewActivityList extends _$FetchNewActivityList {
 
   void fetchNewActivity() async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(() async {
-      ActivityEntity? fetchedActivity;
-      ActivityRepo activityRepo = ref.watch(activityRepoImplProvider);
-      ActivityType? selectedActivityType = ref.watch(
-        selectActivityTypeProvider,
-      );
-      if (selectedActivityType != null) {
-        fetchedActivity = await activityRepo.getActivity(
-          selectedActivityType,
+    state = await AsyncValue.guard(
+      () async {
+        ActivityEntity? fetchedActivity;
+        ActivityType? selectedActivityType = ref.read(
+          selectActivityTypeProvider,
         );
-        log("NEW ACTIVITY RECEIVED :: ${fetchedActivity?.activityName}");
-      }
-      _fetchedActivities.add(fetchedActivity!);
-      return List.from(_fetchedActivities);
-    });
+        if (selectedActivityType != null) {
+          fetchedActivity =
+              await ref.watch(activityEntityUseCaseProvider).fetchNewActivity(
+                    selectedActivityType,
+                  );
+          log("NEW ACTIVITY RECEIVED :: ${fetchedActivity.activityName}");
+        }
+        _fetchedActivities.add(fetchedActivity!);
+        return List.from(_fetchedActivities);
+      },
+    );
   }
 }
 

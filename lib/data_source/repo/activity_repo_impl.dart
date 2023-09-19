@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:river_sample/data_source/repo/local_activity_repo.dart';
 import 'package:river_sample/data_source/repo/network_activity_repo.dart';
@@ -13,17 +12,12 @@ class ActivityRepoImpl extends ActivityRepo {
   final NetworkActivityRepo _networkActivityRepo = NetworkActivityRepo();
 
   @override
-  Future<ActivityEntity?> getActivity(ActivityType activityType,) async {
-    try {
-      Activity activity = await _networkActivityRepo.fetchActivity(
-        activityType,
-      );
-      _localActivityRepo.saveActivity(activity);
-      return activity.getActivityEntity();
-    }  catch (e) {
-      log("EXCEPTION IN GET ACTIVITY - $e");
-    }
-    return null;
+  Future<ActivityEntity> getActivity(ActivityType activityType,) async {
+    Activity activity = await _networkActivityRepo.fetchActivity(
+      activityType,
+    );
+    _localActivityRepo.saveActivity(activity);
+    return activity.getActivityEntity();
   }
 
   @override
