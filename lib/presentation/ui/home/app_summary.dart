@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:river_sample/data_source/repo_providers.dart';
-import 'package:river_sample/domain/entities/activity_entity.dart';
-import 'package:river_sample/domain/entity_manager/activity_manager.dart';
 import 'package:river_sample/presentation/ui/components/general.dart';
 import 'package:river_sample/presentation/ui/home/selected_activity_ui.dart';
 import 'package:river_sample/presentation/ui/presser/press_count_tracker.dart';
+
+import '../../../providers/index.dart';
 
 class AppSummary extends ConsumerWidget {
   const AppSummary({super.key});
@@ -37,15 +36,21 @@ class AppSummary extends ConsumerWidget {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               alignment: Alignment.centerLeft,
-              child: StreamBuilder<List<ActivityEntity>>(
-                stream: ref
-                    .watch(activityManagerProvider.notifier)
-                    .fetchAllAvailableActivities(
-                      ref.watch(activityRepoImplProvider),
-                    ),
-                builder: (context, snapshot) {
+              child: Builder(
+                builder: (context) {
+                  int count  = ref.watch(streamAllAvailableActivitiesProvider).when(
+                    data: (data) {
+                      return data.length;
+                    },
+                    error: (e, s) {
+                      return 0;
+                    },
+                    loading: () {
+                      return 0;
+                    },
+                  );
                   return Text(
-                    "Available Activity count - ${snapshot.data?.length ?? 0}",
+                    "Available Activity count - $count",
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,

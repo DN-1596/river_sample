@@ -9,16 +9,16 @@ import 'package:river_sample/domain/repositories/activity_repo.dart';
 import '../isar_db/schemas/activity.dart';
 
 class ActivityRepoImpl extends ActivityRepo {
-  final LocalActivityRepo localActivityRepo = LocalActivityRepo();
-  final NetworkActivityRepo networkActivityRepo = NetworkActivityRepo();
+  final LocalActivityRepo _localActivityRepo = LocalActivityRepo();
+  final NetworkActivityRepo _networkActivityRepo = NetworkActivityRepo();
 
   @override
   Future<ActivityEntity?> getActivity(ActivityType activityType,) async {
     try {
-      Activity activity = await networkActivityRepo.fetchActivity(
+      Activity activity = await _networkActivityRepo.fetchActivity(
         activityType,
       );
-      localActivityRepo.saveActivity(activity);
+      _localActivityRepo.saveActivity(activity);
       return activity.getActivityEntity();
     }  catch (e) {
       log("EXCEPTION IN GET ACTIVITY - $e");
@@ -28,7 +28,7 @@ class ActivityRepoImpl extends ActivityRepo {
 
   @override
   Stream<List<ActivityEntity>> activityListStream() {
-    return localActivityRepo.activityListStream().transform(
+    return _localActivityRepo.activityListStream().transform(
       StreamTransformer.fromHandlers(
         handleData: (data, sink) {
           sink.add(

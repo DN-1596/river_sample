@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:river_sample/domain/entities/activity_entity.dart';
-import 'package:river_sample/presentation/providers/boring/selected_activity.dart';
 import 'package:river_sample/presentation/ui/boring/activity_card.dart';
+
+import '../../../providers/index.dart';
 
 class SelectedActivityUI extends ConsumerWidget {
   const SelectedActivityUI({super.key});

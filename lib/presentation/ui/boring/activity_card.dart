@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:river_sample/domain/entities/activity_entity.dart';
-import 'package:river_sample/presentation/providers/boring/selected_activity.dart';
+
+import '../../../providers/index.dart';
+
 
 class ActivityCard extends ConsumerStatefulWidget {
   final ActivityEntity activityEntity;

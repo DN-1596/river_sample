@@ -1,24 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:river_sample/domain/entities/activity_entity.dart';
-import 'package:river_sample/domain/entity_manager/activity_manager.dart';
-import 'package:river_sample/presentation/providers/boring/activity_form_manager.dart';
 import 'package:river_sample/presentation/ui/components/general.dart';
+import 'package:river_sample/providers/ui_providers/boring/activity_form_manager.dart';
 import 'package:river_sample/shared/named_routes.dart';
 import 'package:river_sample/shared/router_provider.dart';
 
-class ActivityFormUI extends ConsumerStatefulWidget {
+class ActivityFormUI extends ConsumerWidget {
   const ActivityFormUI({super.key});
 
   @override
-  ConsumerState<ActivityFormUI> createState() => _ActivityFormUIState();
-}
-
-class _ActivityFormUIState extends ConsumerState<ActivityFormUI> {
-  ActivityType? activityType;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -29,11 +23,13 @@ class _ActivityFormUIState extends ConsumerState<ActivityFormUI> {
             children: <Widget>[
               DropdownButton<ActivityType>(
                 hint: const Text("Select Activity Type"),
-                value: activityType,
+                value: ref.watch(selectActivityTypeProvider),
                 onChanged: (newValue) {
-                  setState(() {
-                    activityType = newValue;
-                  });
+                  ref
+                      .watch(selectActivityTypeProvider.notifier)
+                      .selectActivityType(
+                        newValue,
+                      );
                 },
                 items: ActivityType.values.map(
                   (item) {
@@ -47,17 +43,25 @@ class _ActivityFormUIState extends ConsumerState<ActivityFormUI> {
               spaceWidget,
               ElevatedButton(
                 onPressed: () {
-                  if (!ref.watch(activityManagerProvider).isLoading &&
-                      activityType != null) {
+                  if (!ref.watch(fetchNewActivityListProvider).isLoading) {
                     ref
-                        .watch(activityFormManagerProvider.notifier)
-                        .fetchActivity(activityType!);
+                        .watch(fetchNewActivityListProvider.notifier)
+                        .fetchNewActivity();
                   }
                 },
                 child: Text(
-                  ref.watch(activityManagerProvider).isLoading
-                      ? 'Loading New Activity ...'
-                      : 'Fetch New Activity',
+                  ref.watch(fetchNewActivityListProvider).when(
+                    data: (data) {
+                      return 'Fetch New Activity';
+                    },
+                    error: (e, s) {
+                      log("ERROR IN FETCHING ACTIVITY - $e");
+                      return "ERROR IN FETCHING ACTIVITY";
+                    },
+                    loading: () {
+                      return "Loading New Activity ...";
+                    },
+                  ),
                 ),
               ),
               spaceWidget,
